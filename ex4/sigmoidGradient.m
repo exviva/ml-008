@@ -14,8 +14,12 @@ g = zeros(size(z));
 
 
 
-
-
+for i = 1:size(z, 1)
+  for j = 1:size(z, 2)
+    s = sigmoid(z(i, j));
+    g(i, j) = s * (1 - s);
+  endfor
+endfor
 
 
 
