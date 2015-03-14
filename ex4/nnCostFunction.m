@@ -81,7 +81,10 @@ endfor
 
 J = J / m;
 
+regularization = sum((Theta1(:, 2:end) .^ 2)(:)) + sum((Theta2(:, 2:end) .^ 2)(:));
+regularization = 0.5 * lambda * regularization / m;
 
+J = J + regularization;
 
 
 
