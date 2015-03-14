@@ -66,8 +66,20 @@ Theta2_grad = zeros(size(Theta2));
 
 
 
+X = [ones(m, 1) X];
 
+for i = 1:m
+  hidden_layer_output = sigmoid(X(i, :) * Theta1');
+  hidden_layer_output = [1 hidden_layer_output];
+  h = sigmoid(hidden_layer_output * Theta2');
 
+  the_y = zeros(1, size(h, 2));
+  the_y(y(i)) = 1;
+
+  J = J + -the_y * log(h)' - (1 - the_y) * log(1 - h)';
+endfor
+
+J = J / m;
 
 
 
