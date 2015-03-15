@@ -94,9 +94,19 @@ regularization = 0.5 * lambda * regularization / m;
 J = J + regularization;
 
 
+for i = 1:m
+  a1 = X(i, :);
+  [z2, a2, z3, h] = nn_output(a1);
+  the_y = to_binary_vector(size(h, 2), y(i));
+  d3 = h - the_y;
+  d2 = (Theta2(:, 2:end)' * d3')' .* sigmoidGradient(z2);
 
+  Theta2_grad = Theta2_grad + d3' * a2;
+  Theta1_grad = Theta1_grad + d2' * a1;
+endfor
 
-
+Theta2_grad = Theta2_grad / m;
+Theta1_grad = Theta1_grad / m;
 
 
 
