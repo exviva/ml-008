@@ -64,17 +64,24 @@ Theta2_grad = zeros(size(Theta2));
 
 
 
+function y = to_binary_vector(size, i)
+  y = zeros(1, size);
+  y(i) = 1;
+end
 
+function [z2, a2, z3, h] = nn_output(a1)
+  z2 = a1 * Theta1';
+  a2 = sigmoid(z2);
+  a2 = [1 a2];
+  z3 = a2 * Theta2';
+  h = sigmoid(z3);
+end
 
 X = [ones(m, 1) X];
 
 for i = 1:m
-  hidden_layer_output = sigmoid(X(i, :) * Theta1');
-  hidden_layer_output = [1 hidden_layer_output];
-  h = sigmoid(hidden_layer_output * Theta2');
-
-  the_y = zeros(1, size(h, 2));
-  the_y(y(i)) = 1;
+  [z2, a2, z3, h] = nn_output(X(i, :));
+  the_y = to_binary_vector(size(h, 2), y(i));
 
   J = J + -the_y * log(h)' - (1 - the_y) * log(1 - h)';
 endfor
