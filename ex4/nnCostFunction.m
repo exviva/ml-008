@@ -108,8 +108,11 @@ endfor
 Theta2_grad = Theta2_grad / m;
 Theta1_grad = Theta1_grad / m;
 
+Theta2_reg = [zeros(size(Theta2, 1), 1), lambda * Theta2(:, 2:end) / m];
+Theta1_reg = [zeros(size(Theta1, 1), 1), lambda * Theta1(:, 2:end) / m];
 
-
+Theta2_grad = Theta2_grad + Theta2_reg;
+Theta1_grad = Theta1_grad + Theta1_reg;
 
 
 % -------------------------------------------------------------
