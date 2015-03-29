@@ -27,6 +27,8 @@ regularization = 0.5 * lambda * sum(theta(2:end) .^ 2) / m;
 J = sum((X * theta - y) .^ 2) / (2 * m) + regularization;
 
 
+grad_regularization = [0; lambda * theta(2:end) / m]';
+grad = ((X * theta - y)' * X) / m + grad_regularization;
 
 
 
