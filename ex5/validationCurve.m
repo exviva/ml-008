@@ -40,6 +40,13 @@ error_val = zeros(length(lambda_vec), 1);
 %
 
 
+for i = 1:length(lambda_vec)
+    lambda = lambda_vec(i);
+
+    [et, ev] = learningCurve(X, y, Xval, yval, lambda);
+    error_train(i) = et(size(et, 1));
+    error_val(i) = ev(size(ev, 1));
+end
 
 
 
