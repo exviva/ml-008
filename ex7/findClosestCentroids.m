@@ -21,6 +21,18 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+for i = 1:size(idx,1)
+  minimum = Inf;
+
+  for j = 1:K
+    the_norm = norm(centroids(j, :) - X(i, :));
+
+    if the_norm < minimum
+      minimum = the_norm;
+      idx(i) = j;
+    end
+  end
+end
 
 
 
