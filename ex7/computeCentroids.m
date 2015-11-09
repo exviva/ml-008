@@ -27,6 +27,21 @@ centroids = zeros(K, n);
 %
 
 
+for i = 1:K
+  members = 0;
+
+  for j = 1:m
+    if idx(j) == i
+      if members == 0
+        members = X(j, :);
+      else
+        members = [members; X(j, :)];
+      end
+    end
+  end
+
+  centroids(i, :) = mean(members);
+end
 
 
 
